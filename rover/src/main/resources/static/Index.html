@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Movimiento en cuadrícula</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div id="fondo-contenedor">
+    <img id="movil" src="img/rover-pixel.png" alt="movil" />
+  </div>
+
+  <div id="ui-container">
+    <div id="botones-direccionales">
+      <button id="btn-up" class="btn-flecha">
+        <img src="img/btn-up.PNG" alt="Arriba" />
+      </button>
+      <button id="btn-left" class="btn-flecha">
+        <img src="img/btn-left.PNG" alt="Atras" />
+      </button>
+      <button id="btn-down" class="btn-flecha">
+        <img src="img/btn-down.PNG" alt="Abajo" />
+      </button>
+      <button id="btn-right" class="btn-flecha">
+        <img src="img/btn-rigth.png" alt="Adelante" />
+      </button>
+    </div>
+
+    <div id="instrucciones">
+      <textarea id="area-instrucciones" readonly placeholder="WAITING INSTRUCTIONS... PRESS DIRECTIONAL KEYS"></textarea>
+      <textarea id="info-posicion" readonly placeholder="ROVER STATE..."></textarea>
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="scripts.js"></script>
+</body>
+</html>

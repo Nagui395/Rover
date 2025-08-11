@@ -23,7 +23,6 @@ public class RoverController {
         return rover;
     }
 
-
     @PostMapping("api/rover/")
     public void create(@RequestBody RoverDto rover) {
         System.out.println(rover);
