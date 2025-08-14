@@ -4,6 +4,8 @@ import aguilar.natalia.rover.dto.CommandDto;
 import aguilar.natalia.rover.dto.RoverDto;
 import aguilar.natalia.rover.models.Direction;
 import aguilar.natalia.rover.models.Rover;
+import aguilar.natalia.rover.services.RoverService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,14 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RoverController {
 
+    @Autowired
+    RoverService service;
 
     @GetMapping("api/rover/")
     public Rover get() {
-        Rover rover= new Rover();
-        rover.setX(1);
-        rover.setY(6);
-        rover.setDirection(Direction.EAST);
-        return rover;
+        return service.get();
     }
 
     @PostMapping("api/rover/")
@@ -37,5 +37,7 @@ public class RoverController {
 
         }
     }
+
+
 
 }

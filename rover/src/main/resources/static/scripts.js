@@ -44,103 +44,107 @@ $(document).ready(function () {
     if (dx === 1 && dy === 0) return 90;     // EAST
     if (dx === 0 && dy === 1) return 180;    // SOUTH
     if (dx === -1 && dy === 0) return 270;   // WEST
-    return orientacion;
+    return orientacion; // si no coincide, retorna orientación actual
   }
 
   // Diferencia mínima entre ángulos (-180..180)
+  function diferenciaAngulo(objetivo, actual, posX, posY) {
+    let diff = objetivo - actual;
+    while (diff > 180) diff -= 360;
+    while (diff < -180) diff += 360;
 
-function diferenciaAngulo(objetivo, actual, posX, posY) {
-  let diff = objetivo - actual;
-  while (diff > 180) diff -= 360;
-  while (diff < -180) diff += 360;
-
-  // Ajustes para bordes y giros más naturales:
-
-  if (posY === 0) {
-    // Caso mover de EAST (90) a WEST (270) en borde norte
-    if (actual === 90 && objetivo === 270) {
-      // Forzar giro por la izquierda (positivo)
-      diff = 180;
+    // Forzar giro a la izquierda cuando se va de 0 a 270
+    if (actual === 0 && objetivo === 270) {
+      diff = -90;  // izquierda
     }
-    // Caso mover de WEST (270) a EAST (90) en borde norte
-    else if (actual === 270 && objetivo === 90) {
-      // Forzar giro por la derecha (negativo)
-      diff = -180;
+    // Forzar giro a la derecha cuando se va de 270 a 0
+    else if (actual === 270 && objetivo === 0) {
+      diff = 90;   // derecha
     }
+
+    // Ajustes para bordes y giros más naturales:
+    if (posY === 0) {
+      // Caso mover de EAST (90) a WEST (270) en borde norte
+      if (actual === 90 && objetivo === 270) {
+        diff = 180;
+      }
+      // Caso mover de WEST (270) a EAST (90) en borde norte
+      else if (actual === 270 && objetivo === 90) {
+        diff = -180;
+      }
+    }
+
+    return diff;
   }
-
-  return diff;
-}
-
 
   // Según diferencia, retorna comando simple
   function comandoSimple(dx, dy, orientActual, posX, posY) {
-  const objetivo = direccionAGrados(dx, dy);
-  if (objetivo === orientActual) {
-    return "FORWARD";
-  }
-  const diff = diferenciaAngulo(objetivo, orientActual, posX, posY, dx, dy);
+    const objetivo = direccionAGrados(dx, dy);
+    if (objetivo === orientActual) {
+      return "FORWARD";
+    }
+    const diff = diferenciaAngulo(objetivo, orientActual, posX, posY);
 
-  switch(diff) {
-    case 0: return "FORWARD";
-    case 90: return "LEFT";
-    case -90: return "RIGHT";
-    case 180:
-    case -180: return "BACK";
-    default: return "FORWARD";
-  }
-}
-
-function mover(dx, dy, $btn) {
-  const containerWidth = $contenedor.innerWidth();
-  const containerHeight = $contenedor.innerHeight();
-
-  const maxXPos = Math.floor((containerWidth - gridSize) / gridSize);
-  const maxYPos = Math.floor((containerHeight - gridSize) / gridSize);
-
-  const prevX = posX;
-  const prevY = posY;
-
-  const objetivo = direccionAGrados(dx, dy);
-
-  // Guardar orientación previa antes de actualizar
-  const orientacionPrev = orientacion;
-
-  // Calcular diferencia y actualizar orientación
-  const diff = diferenciaAngulo(objetivo, orientacionPrev, posX, posY);
-
-  if (diff !== 0) {
-    orientacion = (orientacion + diff + 360) % 360;
+    switch(diff) {
+      case 0: return "FORWARD";
+      case 90: return "LEFT";
+      case -90: return "RIGHT";
+      case 180:
+      case -180: return "BACK";
+      default: return "FORWARD";
+    }
   }
 
-  // Obtener comando con orientación previa (antes del giro)
-  const comando = comandoSimple(dx, dy, orientacionPrev, posX, posY);
+  function mover(dx, dy, $btn) {
+    const containerWidth = $contenedor.innerWidth();
+    const containerHeight = $contenedor.innerHeight();
 
-  // Actualizar posición
-  posX += dx;
-  posY += dy;
+    const maxXPos = Math.floor((containerWidth - gridSize) / gridSize);
+    const maxYPos = Math.floor((containerHeight - gridSize) / gridSize);
 
-  if (posX < 0) posX = 0;
-  if (posY < 0) posY = 0;
-  if (posX > maxXPos) posX = maxXPos;
-  if (posY > maxYPos) posY = maxYPos;
+    const prevX = posX;
+    const prevY = posY;
 
-  let obstaculo = (posX === prevX && posY === prevY && (dx !== 0 || dy !== 0));
+    const objetivo = direccionAGrados(dx, dy);
 
-  $movil.css({
-    left: (posX * gridSize) + 'px',
-    top: (posY * gridSize) + 'px',
-    transform: `rotate(${orientacion + 180}deg)`
-  });
+    // Guardar orientación previa antes de actualizar
+    const orientacionPrev = orientacion;
 
-  let textoActual = $textarea.val();
-  textoActual += comando + '\n';
-  $textarea.val(textoActual);
-  $textarea.scrollTop($textarea[0].scrollHeight);
+    // Calcular diferencia y actualizar orientación
+    const diff = diferenciaAngulo(objetivo, orientacionPrev, posX, posY);
 
-  actualizarEstado(obstaculo);
-  resaltarBoton($btn);
-}
+    if (diff !== 0) {
+      orientacion = (orientacion + diff + 360) % 360;
+    }
+
+    // Obtener comando con orientación previa (antes del giro)
+    const comando = comandoSimple(dx, dy, orientacionPrev, posX, posY);
+
+    // Actualizar posición
+    posX += dx;
+    posY += dy;
+
+    if (posX < 0) posX = 0;
+    if (posY < 0) posY = 0;
+    if (posX > maxXPos) posX = maxXPos;
+    if (posY > maxYPos) posY = maxYPos;
+
+    let obstaculo = (posX === prevX && posY === prevY && (dx !== 0 || dy !== 0));
+
+    $movil.css({
+      left: (posX * gridSize) + 'px',
+      top: (posY * gridSize) + 'px',
+      transform: `rotate(${orientacion + 180}deg)`
+    });
+
+    let textoActual = $textarea.val();
+    textoActual += comando + '\n';
+    $textarea.val(textoActual);
+    $textarea.scrollTop($textarea[0].scrollHeight);
+
+    actualizarEstado(obstaculo);
+    resaltarBoton($btn);
+  }
 
   // Botones
   $('#btn-up').click(function () { $(this).blur(); mover(0, -1, $(this)); });
