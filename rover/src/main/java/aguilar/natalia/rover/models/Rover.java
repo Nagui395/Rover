@@ -20,6 +20,8 @@ public class Rover {
     private Direction direction;
 
     public Rover(int x, int y) {
-
+        this.x = x;
+        this.y = y;
+        this.direction = Direction.NORTH;
     }
 }
