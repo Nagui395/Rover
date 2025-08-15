@@ -1,6 +1,7 @@
 package aguilar.natalia.rover.models;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
@@ -17,4 +18,8 @@ public class Rover {
     @Column(name="direction")
     @Enumerated(EnumType.STRING)
     private Direction direction;
+
+    public Rover(int x, int y) {
+
+    }
 }
