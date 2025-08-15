@@ -16,4 +16,9 @@ public class Obstacle {
     private Integer x;
     @Column(name="posy")
     private Integer y;
+
+    public Obstacle(Integer x, Integer y) {
+        this.x = x;
+        this.y = y;
+    }
 }
