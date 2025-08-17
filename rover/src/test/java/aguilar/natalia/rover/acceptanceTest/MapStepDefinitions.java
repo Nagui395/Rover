@@ -1,7 +1,7 @@
 package aguilar.natalia.rover.acceptanceTest;
 
 import aguilar.natalia.rover.models.Rover;
-import aguilar.natalia.rover.utils.PositionUtils;
+import aguilar.natalia.rover.utils.MapWrapperUtils;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -56,7 +56,7 @@ public class MapStepDefinitions {
 
         }
 
-        int[] pos = PositionUtils.wrapPosition(rover.getX(), rover.getY(), mapWidth, mapHeight);
+        int[] pos = MapWrapperUtils.wrapPosition(rover.getX(), rover.getY(), mapWidth, mapHeight);
         rover.setX(pos[0]);
         rover.setY(pos[1]);
 

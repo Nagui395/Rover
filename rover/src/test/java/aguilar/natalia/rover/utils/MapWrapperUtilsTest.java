@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-public class PositionUtilsTest {
+public class MapWrapperUtilsTest {
 
     @ParameterizedTest
     @CsvSource({

@@ -149,3 +149,7 @@ body, html {
   font-size: 12px;
   opacity: 1; /* Para que no se vea más transparente */
 }
+.rock {
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.7));
+  z-index: 5;
+}

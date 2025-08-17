@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class MoveTest {
+public class DefaultRoverMovementTest {
 
     @ParameterizedTest
     @CsvSource({
@@ -43,7 +43,7 @@ public class MoveTest {
         List<String> commandList = Arrays.asList(commands.split(","));
 
         for (String command : commandList) {
-            Move.move(rover, map, command);
+            DefaultRoverMovement.move(rover, map, command);
         }
 
         assertEquals(expectedX, rover.getX());
@@ -59,7 +59,7 @@ public class MoveTest {
         map.setObstacleList(new ArrayList<>());
 
         // probamos un comando inválido "X"
-        assertThrows(IllegalArgumentException.class, () -> Move.move(rover, map, "X"));
+        assertThrows(IllegalArgumentException.class, () -> DefaultRoverMovement.move(rover, map, "X"));
     }
 
 

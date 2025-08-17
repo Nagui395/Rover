@@ -19,4 +19,10 @@ public class RoverServiceImp implements RoverService {
       return roverList.get(0);
 
     }
+
+    @Override
+    public Rover update(Rover rover) {
+       return repository.save(rover);
+
+    }
 }

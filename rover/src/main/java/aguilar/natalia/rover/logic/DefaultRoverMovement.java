@@ -4,7 +4,7 @@ import aguilar.natalia.rover.models.Direction;
 import aguilar.natalia.rover.models.Map;
 import aguilar.natalia.rover.models.Rover;
 
-    public class Move {
+    public class DefaultRoverMovement {
 
         public static void move(Rover rover, Map map, String command) {
             if (command == null || command.isBlank()) {

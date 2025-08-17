@@ -1,7 +1,7 @@
 package aguilar.natalia.rover.utils;
 
 
-public class PositionUtils {
+public class MapWrapperUtils {
     private int x;
     private int y;
 

@@ -6,8 +6,17 @@ import java.util.List;
 @Data
 public class Map {
     private static Map map;
+    private int width;
+    private int height;
+    private final int MIN_WIDTH= 10;
+    private final int MIN_HEIGHT= 10;
 
-    private Map() { }
+
+    private Map() {
+
+        this.width= MIN_WIDTH;
+        this.height= MIN_HEIGHT;
+    }
 
     public static Map getInstance() {
         if (map == null) {

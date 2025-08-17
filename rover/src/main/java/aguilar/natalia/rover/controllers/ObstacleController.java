@@ -23,7 +23,7 @@ public class ObstacleController {
     }
 
     @GetMapping("api/obstacle/")
-    public List<Obstacle> getAll() {
+    public List<Obstacle> findAll() {
         return service.findAll();
     }
 }

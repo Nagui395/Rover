@@ -2,7 +2,6 @@ package aguilar.natalia.rover.controllers;
 
 import aguilar.natalia.rover.dto.CommandDto;
 import aguilar.natalia.rover.dto.RoverDto;
-import aguilar.natalia.rover.models.Direction;
 import aguilar.natalia.rover.models.Rover;
 import aguilar.natalia.rover.services.RoverService;
 import org.springframework.beans.factory.annotation.Autowired;
