@@ -32,13 +32,12 @@ Durante el desarrollo de este proyecto se reforzaron y aprendieron habilidades c
 - **Cucumber:** dependencia incluida para futuras pruebas BDD  
 - **Frontend (en desarrollo):** HTML, CSS, JavaScript  
 
-Dependencias principales en Maven (`pom.xml`):  
+## Dependencias principales en Maven (`pom.xml`):  
 - `spring-boot-starter-web`  
 - `spring-boot-starter-data-jpa`  
 - `mysql-connector-j`  
 - `lombok`  
 - `junit-jupiter`  
-- `cucumber-java`, `cucumber-spring`, `cucumber-junit`  
 
 ---
 
@@ -53,12 +52,13 @@ Dependencias principales en Maven (`pom.xml`):
 ## Instalación y Ejecución
 1. Levantar la base de datos MySQL con WAMP.  
 2. Ejecutar el proyecto con Maven:  
-```bash
 
+```bash
 mvn spring-boot:run
+```
 3. El servidor se ejecutará por defecto en http://localhost:8080.
 
-##Endpoints REST
+## Endpoints REST
 
 - RoverController: para manejar los comandos de movimiento del rover.
 
@@ -69,8 +69,8 @@ Ejemplo de uso:
 POST http://localhost:8080/api/rover/command
 Body: { "commands": ["F","F","R","F","L","B"] }
 
-##Estructura del Proyecto
-
+## Estructura del Proyecto
+```bash
 rover/
 ├─ src/
 │  ├─ main/
@@ -112,9 +112,9 @@ rover/
 │        │  ├─ MapWrapperUtilsTest
 │        │  └─ ObstacleBlockingUtilsTest
 └─ pom.xml
+```
 
-
-#Testing
+## Testing
 
 El proyecto incluye tests unitarios con JUnit que cubren la lógica de movimiento del rover y utilidades.
 
@@ -125,6 +125,6 @@ El proyecto incluye tests unitarios con JUnit que cubren la lógica de movimient
 - ObstacleBlockingUtilsTest
 
 
-#Licencia
+# Licencia
 
 Proyecto con fines educativos desarrollado en el Bootcamp de ATL Academy.
