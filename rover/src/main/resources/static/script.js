@@ -1,13 +1,13 @@
 let rover = { x: 0, y: 0 };
 let obstacles = [];
 
-// Mover rover
+
 function moveRover() {
     const roverEl = document.getElementById("movil");
     roverEl.style.left = rover.x * 100 + 'px';
     roverEl.style.top = rover.y * 100 + 'px';
 
-    // Rotar según la dirección
+
     switch (rover.direction) {
         case 'NORTH':
             roverEl.style.transform = 'rotate(0deg)';
@@ -26,12 +26,12 @@ function moveRover() {
     updateRoverInfo();
 }
 
-// Mostrar posición del rover
+
 function updateRoverInfo() {
     document.getElementById('info-posicion').value = `X: ${rover.x} | Y: ${rover.y}`;
 }
 
-// Crear roca con imagen
+
 function createRock(x, y) {
     const rock = document.createElement('img');
     rock.src = './img/rock.png';
@@ -58,7 +58,7 @@ async function createMap() {
     rover.direction = roverJson.direction;
     moveRover();
 
-    // Obtener obstáculos
+
     const obstacleResponse = await fetch('/api/obstacle/', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }

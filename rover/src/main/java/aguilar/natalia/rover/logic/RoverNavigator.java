@@ -1,17 +1,20 @@
-package aguilar.natalia.rover.services;
+package aguilar.natalia.rover.logic;
 
-import aguilar.natalia.rover.logic.DefaultRoverMovement;
 import aguilar.natalia.rover.models.Map;
+import aguilar.natalia.rover.models.Obstacle;
 import aguilar.natalia.rover.models.Rover;
+import aguilar.natalia.rover.services.ObstacleService;
+import aguilar.natalia.rover.services.RoverService;
 import aguilar.natalia.rover.utils.ObstacleBlockingUtils;
 import aguilar.natalia.rover.utils.MapWrapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
     @Service
-    public class MovementService {
+    public class RoverNavigator {
 
         @Autowired
         private RoverService roverService;
@@ -23,6 +26,12 @@ import java.util.List;
             Rover rover = roverService.get();
 
             Map map = Map.getInstance();
+
+            List<Obstacle> obstacles = map.getObstacleList();
+            if (obstacles == null) {
+                obstacles = new ArrayList<>();
+                map.setObstacleList(obstacles);//Si faltara la inicialización, meto dentro los datos obtenidos.
+            }
 
             for (String command : commands) {
                 int prevX = rover.getX();

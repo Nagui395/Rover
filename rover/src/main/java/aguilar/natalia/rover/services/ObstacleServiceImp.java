@@ -17,4 +17,9 @@ public class ObstacleServiceImp implements ObstacleService {
     public List<Obstacle> findAll() {
         return repository.findAll();
     }
+
+    @Override
+    public Obstacle save(Obstacle obstacle) {
+        return repository.save(obstacle);
+    }
 }

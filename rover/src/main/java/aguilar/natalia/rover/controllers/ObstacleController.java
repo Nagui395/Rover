@@ -18,8 +18,9 @@ public class ObstacleController {
     private ObstacleService service;
 
     @PostMapping("api/obstacle/")
-    public void create (@RequestBody ObstacleDto obstacle){
-        System.out.println(obstacle);
+    public Obstacle create (@RequestBody ObstacleDto obstacleDto){
+        Obstacle obstacle = new Obstacle(obstacleDto.getX(), obstacleDto.getY());
+        return service.save(obstacle);
     }
 
     @GetMapping("api/obstacle/")
