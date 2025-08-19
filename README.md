@@ -54,6 +54,7 @@ Dependencias principales en Maven (`pom.xml`):
 1. Levantar la base de datos MySQL con WAMP.  
 2. Ejecutar el proyecto con Maven:  
 ```bash
+
 mvn spring-boot:run
 3. El servidor se ejecutará por defecto en http://localhost:8080.
 
